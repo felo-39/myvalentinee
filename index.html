@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6eb;
+      overflow: hidden;
+    }
+
+    /* background photo */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('her-photo.jpg') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: -1;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 { color: #e6005c; }
+
+    p {
+      color: #444;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes { background: #e6005c; color: white; }
+    .no { background: #ddd; }
+
+    .message {
+      margin-top: 15px;
+      font-size: 16px;
+      display: none;
+    }
+
+    .float {
+      position: absolute;
+      font-size: 24px;
+      animation: rise 4s linear forwards;
+    }
+
+    @keyframes rise {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+
+  <audio id="song" src="song.mp3"></audio>
+
+  <div class="card">
+    <h1>Gloria ❤️</h1>
+    <p>
+      Hey love, I know the distance is not easy, but it can’t beat what we have.
+      Would you be my Valentine?
+    </p>
+
+    <button class="yes" onclick="yesClick()">Yes 💖</button>
+    <button class="no" onclick="noClick()">No 😢</button>
+
+    <div id="yesMsg" class="message">I can’t wait to see you ❤️</div>
+    <div id="noMsg" class="message">😢 It’s okay. Please give me a chance — I promise you won’t regret it.</div>
+  </div>
+
+  <script>
+    function yesClick() {
+      document.getElementById('yesMsg').style.display = 'block';
+      document.getElementById('noMsg').style.display = 'none';
+
+      const music = document.getElementById('song');
+      music.play();
+
+      for (let i = 0; i < 25; i++) {
+        createFloat('❤️');
+        createFloat('🌹');
+        createFloat('🎉');
+      }
+    }
+
+    function noClick() {
+      document.getElementById('noMsg').style.display = 'block';
+      document.getElementById('yesMsg').style.display = 'none';
+    }
+
+    function createFloat(symbol) {
+      const el = document.createElement('div');
+      el.className = 'float';
+      el.innerText = symbol;
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.bottom = '0px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+  </script>
+
+</body>
+</html>
